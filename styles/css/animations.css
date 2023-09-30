@@ -1,0 +1,40 @@
+/* Animation */
+
+.theme-menu__button:disabled::before {
+  animation: arrow-animation 0.5s ease-in-out infinite alternate;
+}
+
+.like-icon.is-liked .heart {
+  animation: scale-animation 0.3s ease-in 0.1s 1 reverse;
+}
+
+.like-icon.is-liked .sparks {
+  animation: sparks-animation 0.3s ease-in 0.3s 1 reverse;
+}
+
+@keyframes arrow-animation {
+  from {
+    left: -15px;
+  }
+  to {
+    left: -10px;
+  }
+}
+
+@keyframes scale-animation {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.5;
+  }
+}
+
+@keyframes sparks-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
