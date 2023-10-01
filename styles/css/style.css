@@ -390,7 +390,6 @@
   font-family: "Press Start 2P", sans-serif;
   font-size: 14px;
   padding: 30px 26px;
-  opacity: 0.5;
   color: var(--text-color);
   background: var(--page-background);
 }

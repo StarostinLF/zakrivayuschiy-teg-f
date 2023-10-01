@@ -408,7 +408,6 @@ $accent-font-family: "Press Start 2P", sans-serif;
 .dialog {
   @include PressStart2PFont(14px);
   padding: 30px 26px;
-  opacity: 0.5;
   color: var(--text-color);
   background: var(--page-background);
 
