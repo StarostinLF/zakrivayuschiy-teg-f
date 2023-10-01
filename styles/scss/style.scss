@@ -1,5 +1,17 @@
-$heart-color: #ff0000;
-$accent-font-family: "Press Start 2P", sans-serif;
+$accent-font-family: var(--fantasy-font-family);
+$text-font-weight: var(--text-font-weight);
+$title-font-weight: var(--title-font-weight);
+$page-background: var(--page-background);
+$background-color: var(--background-color);
+$background-color-start: var(--background-color-start);
+$background-color-end: var(--background-color-end);
+$header-background: var(--header-background);
+$heart-color: var(--heart-color);
+$text-color: var(--text-color);
+
+$label-stroke-color: var(--label-stroke-color);
+$mix-blend-color: var(--mix-blend-color);
+$stroke-color: var(--stroke-color);
 
 @mixin PressStart2PFont($fs) {
   font-family: $accent-font-family;
@@ -9,25 +21,31 @@ $accent-font-family: "Press Start 2P", sans-serif;
 /* Body */
 
 .page {
-  font-variation-settings: var(--text-font-weight);
+  font-variation-settings: $text-font-weight;
   min-inline-size: 320px;
   min-block-size: 100dvb;
-  color: var(--text-color);
+  color: $text-color;
   background: repeating-linear-gradient(
-      to right,
-      var(--background-color) 0 3px,
-      transparent 3px 5px
+      90deg,
+      $background-color,
+      $background-color 2px,
+      transparent 2px,
+      transparent 4px
     ),
     repeating-linear-gradient(
-      var(--background-color) 0 3px,
-      transparent 3px 5px
+      180deg,
+      $background-color-start,
+      $background-color-end 2px,
+      transparent 2px,
+      transparent 4px
     ),
-    linear-gradient(
-      var(--background-color-start),
-      var(--background-color-end) 100%
+    repeating-linear-gradient(
+      180deg,
+      $background-color-start 0.01%,
+      $background-color-end
     );
+  background-attachment: fixed;
   background-size: cover;
-  transition: 0.3s ease;
 }
 
 /* Photo filters */
@@ -72,22 +90,28 @@ $accent-font-family: "Press Start 2P", sans-serif;
 
 .image-label {
   @include PressStart2PFont(14px);
-  font-variation-settings: "wght" 400;
+  font-variation-settings: $text-font-weight;
   z-index: 1;
   opacity: 0.5;
   mix-blend-mode: hard-light;
-  text-shadow: -1px 0 var(--label-stroke-color), 0 1px var(--label-stroke-color),
-    1px 0 var(--label-stroke-color), 0 -1px var(--label-stroke-color);
+  text-shadow: -1px 0 $label-stroke-color, 0 1px $label-stroke-color,
+    1px 0 $label-stroke-color, 0 -1px $label-stroke-color;
   position: absolute;
   right: 25px;
   top: 27px;
 
   @supports (
-    (text-stroke: 1px var(--label-stroke-color)) or
-      (-webkit-text-stroke: 1px var(--label-stroke-color))
+    (text-stroke: 1px $label-stroke-color) or
+      (-webkit-text-stroke: 1px $label-stroke-color)
   ) {
     text-shadow: none;
-    -webkit-text-stroke: 1px var(--label-stroke-color);
+    -webkit-text-stroke: 1px $label-stroke-color;
+    text-stroke: 1px $label-stroke-color;
+  }
+
+  @media (width <= 375px) {
+    right: 10px;
+    top: 24px;
   }
 }
 
@@ -105,12 +129,9 @@ $accent-font-family: "Press Start 2P", sans-serif;
 }
 
 .like-icon {
-  width: 39px;
-  height: 36px;
-  fill: var(--text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: inherit;
+  height: inherit;
+  fill: $text-color;
   position: relative;
   z-index: 1;
 
@@ -120,16 +141,16 @@ $accent-font-family: "Press Start 2P", sans-serif;
   }
 
   .contour {
-    fill: var(--text-color);
+    fill: $text-color;
   }
 
   .main-body {
-    fill: var(--page-background);
+    fill: $page-background;
     transition: fill 0.3s linear;
   }
 
   .core {
-    fill: var(--page-background);
+    fill: $page-background;
     transition: fill 0.3s 0.05s;
   }
 
@@ -140,11 +161,11 @@ $accent-font-family: "Press Start 2P", sans-serif;
 
   &:hover {
     .main-body {
-      fill: var(--text-color);
+      fill: $text-color;
     }
 
     .core {
-      fill: var(--text-color);
+      fill: $text-color;
     }
   }
 
@@ -179,9 +200,9 @@ $accent-font-family: "Press Start 2P", sans-serif;
   @include PressStart2PFont(14px);
   position: relative;
   overflow: hidden;
-  color: var(--mix-blend-color);
+  color: $mix-blend-color;
   background: none;
-  border: 2px solid var(--stroke-color);
+  border: 2px solid $stroke-color;
   cursor: pointer;
   transition: 0.5s ease-in-out;
 
@@ -191,12 +212,12 @@ $accent-font-family: "Press Start 2P", sans-serif;
     top: 0;
     left: 0;
     display: block;
-    background: var(--text-color);
-    transform: translateX(-100%);
-    transition: transform 0.5s ease-in-out;
     width: 100%;
     height: 100%;
     overflow: hidden;
+    background: $text-color;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
   }
 
   &:hover {
@@ -207,11 +228,14 @@ $accent-font-family: "Press Start 2P", sans-serif;
 
   &:focus {
     outline: none;
-    box-shadow: 2px 2px 0px 0px var(--text-color);
+  }
+
+  &:focus-visible {
+    box-shadow: 2px 2px 0px 0px $text-color;
   }
 
   &__text {
-    color: var(--mix-blend-color);
+    color: $mix-blend-color;
     mix-blend-mode: difference;
   }
 }
@@ -222,7 +246,7 @@ $accent-font-family: "Press Start 2P", sans-serif;
   display: flex;
   gap: 8px;
   align-items: center;
-  background: var(--page-background);
+  background: $page-background;
 
   @media (width <= 375px) {
     flex-direction: column;
@@ -232,7 +256,7 @@ $accent-font-family: "Press Start 2P", sans-serif;
 .ok-button {
   text-transform: uppercase;
   padding: 10px 0;
-  background: var(--page-background);
+  background: $page-background;
 }
 
 /* Main */
@@ -249,9 +273,9 @@ $accent-font-family: "Press Start 2P", sans-serif;
   font-family: $accent-font-family;
   text-align: center;
   margin: 100px 0;
-  padding: 136px 0 21px;
-  background: var(--header-background);
-  border: 2px solid var(--stroke-color);
+  padding: 136px 0 23px;
+  background: $header-background;
+  border: 2px solid $stroke-color;
 
   &__link {
     font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
@@ -261,11 +285,11 @@ $accent-font-family: "Press Start 2P", sans-serif;
   &__title {
     font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
     text-transform: uppercase;
-    margin: 19px 0 24px;
+    margin: 20px 0 25px;
   }
 
   @media (width <= 375px) {
-    padding: 120px 0 21px;
+    padding: 120px 0 24px;
   }
 }
 
@@ -274,15 +298,15 @@ $accent-font-family: "Press Start 2P", sans-serif;
     font-size: 14px;
     display: flex;
     flex-direction: column;
-    gap: 11px;
+    gap: 12px;
     width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
     text-align: start;
-    margin: 0 44.4%;
+    margin: 0 45.1%;
 
     @media (width <= 375px) {
-      margin: 0 39.4%;
+      margin: 0 41.1%;
     }
   }
 
@@ -291,14 +315,17 @@ $accent-font-family: "Press Start 2P", sans-serif;
   }
 
   &__button {
+    padding: 0;
     text-transform: uppercase;
     background: none;
     border: none;
-    transition: 0.3s ease;
+    overflow: hidden;
     cursor: pointer;
 
     &:disabled {
       opacity: 0.6;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
 
       &::before {
         content: "▶";
@@ -312,17 +339,20 @@ $accent-font-family: "Press Start 2P", sans-serif;
       display: block;
       width: 100%;
       height: 2px;
+      background-color: $text-color;
       opacity: 0.6;
-      transition: scale 0.3s ease;
-      scale: 0;
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
     }
 
     &:hover {
       opacity: 0.6;
+      transition: opacity 0.3s ease;
     }
 
     &:focus {
       outline: none;
+      opacity: 0.6;
     }
 
     &:focus-visible {
@@ -330,7 +360,7 @@ $accent-font-family: "Press Start 2P", sans-serif;
       transition: opacity 0.3s ease;
 
       &::after {
-        scale: 1;
+        transform: translateX(0);
       }
     }
   }
@@ -339,31 +369,35 @@ $accent-font-family: "Press Start 2P", sans-serif;
 /* Section */
 
 .section {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
+  display: inherit;
+  flex-direction: inherit;
+  gap: inherit;
 }
 
 /* Cards */
 
 .card {
-  border: 2px solid var(--stroke-color);
-  background: var(--header-background);
+  border: 2px solid $stroke-color;
+  background: $header-background;
 
   &__title {
     font-size: 18px;
-    font-variation-settings: var(--title-font-weight);
+    font-variation-settings: $title-font-weight;
     padding: 4px 10px;
   }
 
   &__image {
     display: block;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
 
     &-container {
       overflow: hidden;
       position: relative;
-      border-top: 2px solid var(--stroke-color);
-      border-bottom: 2px solid var(--stroke-color);
+      border-top: 2px solid $stroke-color;
+      border-bottom: 2px solid $stroke-color;
     }
   }
 
@@ -378,9 +412,20 @@ $accent-font-family: "Press Start 2P", sans-serif;
   }
 
   &__icon-button {
+    padding: 0;
+    width: 39px;
+    height: 36px;
     background: transparent;
     border: none;
     cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $stroke-color;
+    }
   }
 
   &__like-button {
@@ -391,6 +436,7 @@ $accent-font-family: "Press Start 2P", sans-serif;
       display: flex;
       align-items: center;
       justify-content: end;
+      gap: 6px;
     }
   }
 
@@ -408,17 +454,16 @@ $accent-font-family: "Press Start 2P", sans-serif;
 .dialog {
   @include PressStart2PFont(14px);
   padding: 30px 26px;
-  color: var(--text-color);
-  background: var(--page-background);
+  color: $text-color;
+  background: $page-background;
+  border: 2px solid $stroke-color;
 
   &::-webkit-backdrop {
-    opacity: 0.75;
-    background: #000;
+    background-color: rgba(0, 0, 0, 0.75);
   }
 
   &::backdrop {
-    opacity: 0.75;
-    background: #000;
+    background-color: rgba(0, 0, 0, 0.75);
   }
 
   &:not([open]) {
@@ -439,7 +484,7 @@ $accent-font-family: "Press Start 2P", sans-serif;
 
   &__text {
     text-transform: uppercase;
-    line-height: 150%;
+    line-height: 1.5;
     max-width: 234px;
     width: 100%;
 
@@ -458,11 +503,6 @@ $accent-font-family: "Press Start 2P", sans-serif;
     width: 39px;
     height: 39px;
     mix-blend-mode: normal;
-
-    @media (width <= 375px) {
-      width: 39px;
-      height: 39px;
-    }
   }
 
   @media (width <= 375px) {

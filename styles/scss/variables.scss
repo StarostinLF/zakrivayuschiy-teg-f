@@ -1,7 +1,9 @@
 /* Root variables */
 
 :root {
-  --font-family: Inter;
+  --main-font-family: Inter;
+  --fantasy-font-family: "Press Start 2P", fantasy;
+  --heart-color: #ff0000;
 }
 
 @media (prefers-color-scheme: light) {

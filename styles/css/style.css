@@ -8,20 +8,26 @@
   min-block-size: 100dvb;
   color: var(--text-color);
   background: repeating-linear-gradient(
-      to right,
-      var(--background-color) 0 3px,
-      transparent 3px 5px
+      90deg,
+      var(--background-color),
+      var(--background-color) 2px,
+      transparent 2px,
+      transparent 4px
     ),
     repeating-linear-gradient(
-      var(--background-color) 0 3px,
-      transparent 3px 5px
-    ),
-    linear-gradient(
+      180deg,
       var(--background-color-start),
-      var(--background-color-end) 100%
+      var(--background-color-end) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      var(--background-color-start) 0.01%,
+      var(--background-color-end)
     );
+  background-attachment: fixed;
   background-size: cover;
-  transition: 0.3s ease;
 }
 
 /* Photo filters */
@@ -57,9 +63,9 @@
 /* Image labels */
 
 .image-label {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: var(--fantasy-font-family);
   font-size: 14px;
-  font-variation-settings: "wght" 400;
+  font-variation-settings: var(--text-font-weight);
   z-index: 1;
   opacity: 0.5;
   mix-blend-mode: hard-light;
@@ -75,6 +81,14 @@
   .image-label {
     text-shadow: none;
     -webkit-text-stroke: 1px var(--label-stroke-color);
+    text-stroke: 1px var(--label-stroke-color);
+  }
+}
+
+@media (width <= 375px) {
+  .image-label {
+    right: 10px;
+    top: 24px;
   }
 }
 
@@ -94,12 +108,9 @@
 }
 
 .like-icon {
-  width: 39px;
-  height: 36px;
+  width: inherit;
+  height: inherit;
   fill: var(--text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
   z-index: 1;
 }
@@ -125,7 +136,7 @@
 
 .like-icon .sparks {
   opacity: 0;
-  fill: #ff0000;
+  fill: var(--heart-color);
 }
 
 .like-icon:hover .main-body {
@@ -137,29 +148,29 @@
 }
 
 .like-icon:active .main-body {
-  fill: #ff0000;
+  fill: var(--heart-color);
 }
 
 .like-icon:active .core {
-  fill: #ff0000;
+  fill: var(--heart-color);
 }
 
 .like-icon.is-liked .contour {
-  fill: #ff0000;
+  fill: var(--heart-color);
 }
 
 .like-icon.is-liked .main-body {
-  fill: #ff0000;
+  fill: var(--heart-color);
 }
 
 .like-icon.is-liked .core {
-  fill: #ff0000;
+  fill: var(--heart-color);
 }
 
 /* Buttons */
 
 .button {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: var(--fantasy-font-family);
   font-size: 14px;
   position: relative;
   overflow: hidden;
@@ -176,12 +187,12 @@
   top: 0;
   left: 0;
   display: block;
-  background: var(--text-color);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background: var(--text-color);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
 }
 
 .button:hover::before {
@@ -190,6 +201,9 @@
 
 .button:focus {
   outline: none;
+}
+
+.button:focus-visible {
   box-shadow: 2px 2px 0px 0px var(--text-color);
 }
 
@@ -230,10 +244,10 @@
 /* Header */
 
 .header {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: var(--fantasy-font-family);
   text-align: center;
   margin: 100px 0;
-  padding: 136px 0 21px;
+  padding: 136px 0 23px;
   background: var(--header-background);
   border: 2px solid var(--stroke-color);
 }
@@ -246,12 +260,12 @@
 .header__title {
   font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
   text-transform: uppercase;
-  margin: 19px 0 24px;
+  margin: 20px 0 25px;
 }
 
 @media (width <= 375px) {
   .header {
-    padding: 120px 0 21px;
+    padding: 120px 0 24px;
   }
 }
 
@@ -259,16 +273,16 @@
   font-size: 14px;
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: 12px;
   width: -moz-min-content;
   width: min-content;
   text-align: start;
-  margin: 0 44.4%;
+  margin: 0 45.1%;
 }
 
 @media (width <= 375px) {
   .theme-menu__list {
-    margin: 0 39.4%;
+    margin: 0 41.1%;
   }
 }
 
@@ -277,15 +291,18 @@
 }
 
 .theme-menu__button {
+  padding: 0;
   text-transform: uppercase;
   background: none;
   border: none;
-  transition: 0.3s ease;
+  overflow: hidden;
   cursor: pointer;
 }
 
 .theme-menu__button:disabled {
   opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .theme-menu__button:disabled::before {
@@ -299,17 +316,20 @@
   display: block;
   width: 100%;
   height: 2px;
+  background-color: var(--text-color);
   opacity: 0.6;
-  transition: scale 0.3s ease;
-  scale: 0;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
 }
 
 .theme-menu__button:hover {
   opacity: 0.6;
+  transition: opacity 0.3s ease;
 }
 
 .theme-menu__button:focus {
   outline: none;
+  opacity: 0.6;
 }
 
 .theme-menu__button:focus-visible {
@@ -318,15 +338,15 @@
 }
 
 .theme-menu__button:focus-visible::after {
-  scale: 1;
+  transform: translateX(0);
 }
 
 /* Section */
 
 .section {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
+  display: inherit;
+  flex-direction: inherit;
+  gap: inherit;
 }
 
 /* Cards */
@@ -344,6 +364,10 @@
 
 .card__image {
   display: block;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
 }
 
 .card__image-container {
@@ -362,9 +386,20 @@
 }
 
 .card__icon-button {
+  padding: 0;
+  width: 39px;
+  height: 36px;
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  outline: 2px solid var(--stroke-color);
 }
 
 .card__like-button {
@@ -376,6 +411,7 @@
   display: flex;
   align-items: center;
   justify-content: end;
+  gap: 6px;
 }
 
 @media (width <= 375px) {
@@ -387,16 +423,16 @@
 /* Modal */
 
 .dialog {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: var(--fantasy-font-family);
   font-size: 14px;
   padding: 30px 26px;
   color: var(--text-color);
   background: var(--page-background);
+  border: 2px solid var(--stroke-color);
 }
 
 .dialog::backdrop {
-  opacity: 0.75;
-  background: #000;
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .dialog:not([open]) {
@@ -419,7 +455,7 @@
 
 .dialog__text {
   text-transform: uppercase;
-  line-height: 150%;
+  line-height: 1.5;
   max-width: 234px;
   width: 100%;
 }
@@ -440,13 +476,6 @@
   width: 39px;
   height: 39px;
   mix-blend-mode: normal;
-}
-
-@media (width <= 375px) {
-  .dialog .floppy-image {
-    width: 39px;
-    height: 39px;
-  }
 }
 
 @media (width <= 375px) {

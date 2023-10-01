@@ -14,32 +14,34 @@
 .like-icon {
   &.is-liked {
     .heart {
-      animation: scale-animation 0.3s ease-in 0.1s 1 reverse;
+      -webkit-animation: scale-animation 0.3s ease-in 0.1s 1 alternate;
+      animation: scale-animation 0.3s ease-in 0.1s 1 alternate;
     }
 
     .sparks {
-      animation: sparks-animation 0.3s ease-in 0.3s 1 reverse;
+      -webkit-animation: sparks-animation 0.3s ease-in 0.3s 1 alternate;
+      animation: sparks-animation 0.3s ease-in 0.3s 1 alternate;
     }
   }
 }
 
 @-webkit-keyframes arrow-animation {
   from {
-    left: -15px;
+    left: -20px;
   }
 
   to {
-    left: -10px;
+    left: -16px;
   }
 }
 
 @keyframes arrow-animation {
   from {
-    left: -15px;
+    left: -20px;
   }
 
   to {
-    left: -10px;
+    left: -16px;
   }
 }
 
