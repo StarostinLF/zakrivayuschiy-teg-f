@@ -229,6 +229,7 @@
 
 .ok-button {
   text-transform: uppercase;
+  width: 100%;
   padding: 10px 0;
   background: var(--page-background);
 }
@@ -296,13 +297,14 @@
   background: none;
   border: none;
   overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease;
   cursor: pointer;
 }
 
 .theme-menu__button:disabled {
   opacity: 0.6;
   pointer-events: none;
-  transition: opacity 0.3s ease;
 }
 
 .theme-menu__button:disabled::before {
@@ -324,7 +326,6 @@
 
 .theme-menu__button:hover {
   opacity: 0.6;
-  transition: opacity 0.3s ease;
 }
 
 .theme-menu__button:focus {
@@ -334,7 +335,6 @@
 
 .theme-menu__button:focus-visible {
   opacity: 0.6;
-  transition: opacity 0.3s ease;
 }
 
 .theme-menu__button:focus-visible::after {

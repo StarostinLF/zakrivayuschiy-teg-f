@@ -255,6 +255,7 @@ $stroke-color: var(--stroke-color);
 
 .ok-button {
   text-transform: uppercase;
+  width: 100%;
   padding: 10px 0;
   background: $page-background;
 }
@@ -320,12 +321,13 @@ $stroke-color: var(--stroke-color);
     background: none;
     border: none;
     overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.3s ease;
     cursor: pointer;
 
     &:disabled {
       opacity: 0.6;
       pointer-events: none;
-      transition: opacity 0.3s ease;
 
       &::before {
         content: "▶";
@@ -347,7 +349,6 @@ $stroke-color: var(--stroke-color);
 
     &:hover {
       opacity: 0.6;
-      transition: opacity 0.3s ease;
     }
 
     &:focus {
@@ -357,7 +358,6 @@ $stroke-color: var(--stroke-color);
 
     &:focus-visible {
       opacity: 0.6;
-      transition: opacity 0.3s ease;
 
       &::after {
         transform: translateX(0);
