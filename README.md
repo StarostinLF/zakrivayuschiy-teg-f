@@ -11,4 +11,4 @@
 - [readme-файл](https://github.com/StarostinLF/zakrivayuschiy-teg-f/blob/main/README.md);
 - html-страница сайта ([index.html](https://github.com/StarostinLF/zakrivayuschiy-teg-f/blob/main/index.html)).
 
-[https://github.com/StarostinLF/posmotri_v_okno](https://github.com/StarostinLF/zakrivayuschiy-teg-f)
+[https://github.com/StarostinLF/zakrivayuschiy-teg-f](https://github.com/StarostinLF/zakrivayuschiy-teg-f)
